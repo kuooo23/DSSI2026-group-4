@@ -1,0 +1,17 @@
+.DS_Store
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
+.venv/
+.Rhistory
+.RData
+.Rproj.user/
+data/temp/*
+!data/temp/.gitkeep
+*.aux
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+*.blg
+*.bcf
+*.run.xml

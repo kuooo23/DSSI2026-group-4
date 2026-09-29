@@ -1,0 +1,7 @@
+- Author:
+- Date created: YYYYMMDD
+- [File link](url) (please ensure sharing is enabled)
+- File Description: 
+- External file update log:
+    - YYYYMMDD: <description>
+    - YYYYMMDD: <description>

@@ -1,0 +1,4 @@
+interface:
+  display_name: "研究提案撰寫"
+  short_description: "Coach proposal discussion and draft supported sections"
+  default_prompt: "Use $proposal-writer to discuss our own research idea with us one step at a time. Ask focused questions about our reasoning, help clarify our choices, and draft supported sections before assembling the proposal. Default to zh-TW unless we specify another report language."

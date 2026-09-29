@@ -1,0 +1,4 @@
+interface:
+  display_name: "Raw Data Documentation"
+  short_description: "Document original data with the course notebook templates"
+  default_prompt: "Use $raw-data-documentation to document my original data with the course template, asking for any missing format or material inputs and defaulting to zh-TW (Traditional Chinese with Taiwan usage) unless I specify another report language."

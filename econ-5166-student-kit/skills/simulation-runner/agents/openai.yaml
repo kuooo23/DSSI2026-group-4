@@ -1,0 +1,4 @@
+interface:
+  display_name: "Simulation Runner"
+  short_description: "Create reproducible course-format simulation findings"
+  default_prompt: "Use $simulation-runner to produce a simulation finding from the original Rmd or ipynb template, asking for any missing format or material inputs and defaulting to zh-TW (Traditional Chinese with Taiwan usage) unless I specify another report language."

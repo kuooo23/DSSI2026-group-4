@@ -1,0 +1,130 @@
+---
+title: ""
+date: "`r format(Sys.time(), '%Y-%m-%d')`"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(error = FALSE)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+# Data Description
+- Background: 簡述資料內容。若是新接收到的資料，請說明為何會收到這份資料，要分析什麼。
+- date received: YYYYMMDD
+- Path to data file: 原始資料在資料中心（如行資）之路徑。請填寫原始檔案之路徑。
+- Unit of observation:
+- Sample period:
+- Known issues:
+    -
+    -
+- Definition for each variable:
+    -
+    -
+- Data path: `data/raw/<INPUT_FILE_NAME.csv>` (exact local project-relative file, separate from the source location above)
+- Role: `raw`
+- Verification status: `<pending; record the actual read/check results after execution>`
+- SHA-256: `<pending; fill from the actual file, not a copied example>`
+- Next processing notebook: `data/code/<PROCESSING_NAME.ipynb-or-Rmd>` (pending until created)
+
+This notebook documents the unchanged raw file. It does not clean or overwrite it.
+Paths below resolve from the project root or from `data/raw/`, `data/code/`, and
+`data/processed/`. Replace all placeholders and choose reader options for the
+actual format, encoding, IDs, dates, and missing-value codes before execution.
+
+```{r}
+library(readr)
+
+find_project_root <- function(start = getwd()) {
+  candidate <- normalizePath(start, winslash = "/", mustWork = TRUE)
+  repeat {
+    if (file.exists(file.path(candidate, "AGENTS.md")) &&
+        dir.exists(file.path(candidate, "templates"))) return(candidate)
+    parent <- dirname(candidate)
+    if (identical(parent, candidate)) stop("Open this notebook within the student project containing AGENTS.md and templates/.")
+    candidate <- parent
+  }
+}
+PROJECT_ROOT <- find_project_root()
+
+project_file <- function(relative_path, area, must_exist = TRUE) {
+  # Exact project-relative paths only; no first-file search or OS-root /data path.
+  parts <- strsplit(relative_path, "/", fixed = TRUE)[[1]]
+  if (grepl("^(/|~|[A-Za-z]:)", relative_path) || ".." %in% parts ||
+      grepl("<", relative_path, fixed = TRUE) ||
+      !startsWith(relative_path, paste0("data/", area, "/"))) {
+    stop("Replace the placeholder with an exact path inside data/", area, "/: ", relative_path)
+  }
+  path <- file.path(PROJECT_ROOT, relative_path)
+  if (must_exist && (!file.exists(path) || dir.exists(path))) stop("Input file not found: ", path)
+  # Resolve existing ancestors to reject a path that leaves the project via a symlink.
+  ancestor <- path
+  while (!file.exists(ancestor)) ancestor <- dirname(ancestor)
+  resolved <- normalizePath(ancestor, winslash = "/", mustWork = TRUE)
+  allowed <- normalizePath(file.path(PROJECT_ROOT, "data", area), winslash = "/", mustWork = TRUE)
+  if (!startsWith(allowed, paste0(PROJECT_ROOT, "/"))) {
+    stop("data/", area, "/ resolves outside the project root.")
+  }
+  if (!identical(resolved, allowed) && !startsWith(resolved, paste0(allowed, "/"))) {
+    stop("Resolved path leaves data/", area, "/: ", relative_path)
+  }
+  path
+}
+
+sha256_file <- function(path) {
+  if (!requireNamespace("digest", quietly = TRUE)) {
+    stop("Cannot verify input identity: digest is unavailable. Use an available SHA-256 implementation before loading data.")
+  }
+  digest::digest(file = path, algo = "sha256", serialize = FALSE)
+}
+
+verify_input_sha256 <- function(path, expected) {
+  # Bind this run to the exact file inspected when the notebook was prepared.
+  if (!is.character(expected) || length(expected) != 1L || is.na(expected) ||
+      !grepl("^[0-9a-fA-F]{64}$", expected)) {
+    stop("Fill the expected SHA-256 from the inspected input before loading data.")
+  }
+  actual <- sha256_file(path)
+  if (!identical(actual, tolower(expected))) stop("Input changed: identify the new version before loading ", basename(path), ".")
+  actual
+}
+
+```
+
+## Change for Your Own Data
+
+Use the exact project-relative Data path above. A missing path stops execution;
+do not substitute another CSV or use the template/example data. The CSV reader
+below is a scaffold: configure dtypes, date parsing, missing codes, and the reader
+for the actual stored format. Fill the expected SHA-256 from the exact file
+inspected while preparing this notebook; placeholders or a changed file stop
+data loading. Documentation stays pending until executed.
+
+```{r}
+INPUT_RELATIVE_PATH <- "data/raw/<INPUT_FILE_NAME.csv>"
+input_data_file <- project_file(INPUT_RELATIVE_PATH, "raw")
+EXPECTED_SHA256 <- "<INSPECTED_INPUT_SHA256>" # Fill from the exact inspected raw file.
+```
+
+## Summary
+
+```{r}
+input_fingerprint <- verify_input_sha256(input_data_file, EXPECTED_SHA256)
+df <- readr::read_csv(input_data_file, show_col_types = FALSE)
+# Set col_types/locale/na above for the actual file, especially IDs and dates.
+stopifnot(nrow(readr::problems(df)) == 0L)
+print(list(data_path = INPUT_RELATIVE_PATH, rows = nrow(df),
+           schema = vapply(df, function(x) paste(class(x), collapse = "/"), character(1)),
+           sha256 = sha256_file(input_data_file)))
+```
+
+### Sample
+
+```{r}
+head(df, 10)
+```
+
+### Summary Stats
+
+```{r}
+summary(df)
+```

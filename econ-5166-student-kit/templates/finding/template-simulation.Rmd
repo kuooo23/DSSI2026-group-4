@@ -1,0 +1,67 @@
+---
+title: "template-simulation"
+date: "`r format(Sys.time(), '%Y-%m-%d')`"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(error = FALSE)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+# Background
+- **Author**: `<AUTHOR NAME>`
+- **Created At**: `<YYYY-MM-DD>`
+- **Model Specification**
+    - Method：
+    - Tuning Parameters：
+    - Optimization Method：
+- **Main Findings and Takeaways：**
+- **Future Direction：**
+
+Please insert the simulation results below. These should include graphs or tables illustrating how performance metrics  (e.g., MSE for estimators, size and power for hypothesis tests) change with different sample sizes and parameter values.
+
+Make sure you have followed the guidelines as specified in 
+[專案資料夾結構、檔案命名與文件規範](https://docs.google.com/document/d/1sl6gEFMdmiGsiNjLe17UmZ30xKxq15U0Mb2B-Jvusxg/edit?tab=t.33iie8ybx7s4).
+
+```{r}
+# Load packages here
+```
+
+```{r}
+# Declare all the parameter in the data generation processs here.
+# Number of simulation
+
+# Sample size 
+
+# Main parameter of interests
+
+# Other parameters
+```
+
+```{r}
+# Create a function that takes parameters above as arguments and generate the data
+# Concluding this block by generating the data.
+# Note: Please set the seed right before you generate the data.
+```
+
+For the remaining blocks, make sure you have followed the guidelines as specified in [專案資料夾結構、檔案命名與文件規範](https://docs.google.com/document/d/1sl6gEFMdmiGsiNjLe17UmZ30xKxq15U0Mb2B-Jvusxg/edit?tab=t.33iie8ybx7s4).
+
+
+```{r}
+# Include the model specification here.  Please describe the model by stating, including
+# type of method used, the variables included, the hyperparameters, and
+# the method of optimization.
+```
+
+```{r}
+# Define the estimator or test as a function that takes the data as input.
+# If tuning or hyperparameters are required, include them as function arguments. 
+# Declare their default values before defining the function.
+```
+
+```{r}
+```
+
+```{r}
+# Report the performance metrics in this block.
+```

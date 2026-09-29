@@ -1,0 +1,4 @@
+interface:
+  display_name: "預測模型"
+  short_description: "Create a course-format train/test prediction finding"
+  default_prompt: "Use $prediction-model to produce a template-based prediction notebook with verified results with the required summaries, metrics, and plots, asking for any missing format or material inputs and defaulting to zh-TW (Traditional Chinese with Taiwan usage) unless I specify another report language."

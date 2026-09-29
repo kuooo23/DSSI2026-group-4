@@ -1,0 +1,109 @@
+---
+title: "Statistical Analysis"
+author: "<AUTHOR NAME>"
+date: "<YYYY-MM-DD>"
+---
+
+<!-- Deliver the Rmd in finding/ directly for review; HTML is not required and
+is produced only when separately requested. Use the student's requested or
+existing filename, or a descriptive basename. Created At and the YAML date
+are fixed creation dates. Follow the project-root FINDING-RULES.md for handoff
+and external-action scope. -->
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(error = FALSE)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+# Background
+
+- **Author**: `<AUTHOR NAME>`
+- **Created At**: `<YYYY-MM-DD>`
+- **Research Motivation and Context (why are we interested in the findings?)：**
+- **Main Findings and Takeaways：**
+- **Future Direction：**
+
+```{r}
+# Load packages here
+
+
+```
+
+```{r}
+# Load input data here and please finish all the data manipulation here.
+# Finish this block by printing the first ten observations of the data.
+# Note:
+# - You may only read data from /data/processed.
+#   This means this project's data/processed, not the filesystem root;
+#   locate the project portably and document the input source and sample.
+# - Files in /data/processed should already be cleaned and prepared for analysis.
+# - Beyond simple filtering of observations or generating a small number of variables,
+#   further data manipulation is not allowed. If more extensive changes are needed,
+#   update the source data instead.
+# - State exclusions and missing-value handling; send extensive preparation
+#   to data/code/ and write the resulting documented data to data/processed/.
+```
+
+```{r}
+# Before conducting the analysis, report summary statistics for all variables 
+# that will be used in this notebook:
+#   - For numeric variables: mean, min, 25th percentile, median, 75th percentile, 
+#     max, standard deviation, and number of observations.
+#   - For categorical variables: number of observations and the counts/percentages 
+#     of the ten most frequent categories.
+# Classify variables by meaning (including numeric category codes).
+# Include outcomes, predictors, controls, groups, and weights actually used.
+# Report numeric effective N and missing N. Categorical percentages use all
+# nonmissing observations, not just the top-ten subtotal; report missingness
+# separately and state the denominator. Use all categories when fewer than ten.
+# Give summary tables titles, readable variable labels, and sample sizes.
+# Conclude this block with the complete summary statistics.
+```
+
+### The actual analysis starts below
+Make the graphs, summary statistics, regression model below.
+Make sure you have followed the guidelines as specified in 
+[專案資料夾結構、檔案命名與文件規範](https://docs.google.com/document/d/1sl6gEFMdmiGsiNjLe17UmZ30xKxq15U0Mb2B-Jvusxg/edit?tab=t.33iie8ybx7s4).
+
+Use the instructions below for the analyses needed to answer the research question.
+Replace this guidance with executed analysis and explanatory text; do not add an
+unneeded model or copy example findings.
+
+- **Figures:** Add a title, readable variable names, x/y axis labels, and
+  informative legend labels when needed. Avoid overlapping text; address dense
+  scatter points with a suitable display. Show 95% confidence intervals for
+  estimated quantities such as means. Explain what is plotted, which sample it
+  uses, the question, and what the actual figure shows.
+- **Tables:** Add a title, sample size, and readable variable labels. For two
+  groups, report each group's mean and standard deviation, the mean difference
+  (state its direction), and the t-test p-value. Explain the sample, test
+  assumptions, findings, and complex or judgment-dependent variable definitions.
+- **Regression:** Report the outcome mean on each model's estimation sample and
+  N. Default to heteroskedasticity-robust standard errors (e.g., HC1); use
+  cluster-robust errors when the design warrants them, naming the cluster
+  variable and number of clusters. Identify each categorical variable's omitted
+  group. Describe included fixed effects without printing all their coefficients.
+  Define significance stars as `* p < .10`, `** p < .05`, `*** p < .01`
+  (the instructor's `0.90*`, `0.95**`, `0.99***` notation); p-values may also be
+  shown. Explain the specification, sample, standard errors, and variable
+  definitions. Use 95% confidence intervals in coefficient plots.
+
+```{r analysis}
+# Implement only the graphs, tests, or models required for this question.
+# Display actual outputs and add explanatory prose after each relevant output.
+# For regression, select the estimation sample before computing its outcome mean;
+# compute inference using the stated robust/cluster-robust covariance estimator.
+```
+
+Explain the observed results and limitations here, then fill `Main Findings and
+Takeaways` from those results. Keep the document understandable without the chat.
+If work is unexecuted or only partially executed, state that status and the
+specific blocker inside the document; do not invent results.
+
+<!-- Completion: execute the Rmd in a clean R session. knitr::knit() may write
+its output and figures to a temporary location for verification; these temporary
+files are not additional deliverables. Inspect actual tables and figures for
+readable labels and nonoverlapping text, and check that the Rmd's recorded
+findings agree with execution results. Deliver the Rmd directly and record its
+actual execution status. Produce HTML only when separately requested, never as
+a default export or a condition of completion. -->

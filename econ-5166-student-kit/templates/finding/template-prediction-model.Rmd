@@ -1,0 +1,134 @@
+---
+title: "template-prediction-model"
+date: "<YYYY-MM-DD>"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(error = FALSE)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+# Background
+- **Author**: `<AUTHOR NAME>`
+- **Created At**: `<YYYY-MM-DD>`
+- **Path to Training Data：**
+- **Path to Testing Data：**
+- **Model Specification：**
+    - Method：
+    - Variables：
+    - Tuning Parameters：
+    - Optimization Method：
+- **Main Findings and Takeaways：**
+    - In-sample `<metric>`:
+    - Out-sample `<metric>`:
+- **Future Direction：**
+
+> Template only — not executed. Replace this note with the actual execution
+> status. After confirming the student's format, language, author, and question,
+> use the student's requested name, preserve an existing name, or choose a
+> descriptive basename. Deliver the `.Rmd` directly for review; HTML is not
+> required and is produced only when separately requested. `Created At` and the
+> YAML date use the fixed creation date. Follow the project-root
+> `FINDING-RULES.md` for execution and presentation.
+
+```{r load-packages}
+# Load packages here
+```
+
+```{r load-training-data}
+# Load the TRAINING data here and please finish all the data manipulation here.
+# Finish this block by printing the first ten observations of the data.
+# Note:
+# - You may only read analysis data from this project's data/processed/.
+# - Use portable paths that work from the project root or finding/.
+# - Files in /data/processed should already be cleaned and prepared for analysis.
+# - Beyond simple filtering of observations or generating a small number of variables,
+#   further data manipulation is not allowed. If more extensive changes are needed,
+#   update the source data instead.
+```
+
+```{r load-testing-data}
+# Load the TESTING data here and please finish all the data manipulation here.
+# Finish this block by printing the first ten observations of the data.
+# Use this project's data/processed/ and the same limited-manipulation rules.
+# Preserve the documented split; do not create test labels when unavailable.
+```
+
+### Descriptive statistics
+
+Summarize every variable used in the analysis, including the target,
+predictors, and applicable derived, filtering, or grouping variables. Treat
+numeric-coded categories as categorical when appropriate. Present training
+and testing summaries separately; do not use test distributions for model
+selection. Explain the sample and variable definitions in the report language.
+
+```{r training-descriptive-statistics}
+# TRAINING DATA: produce titled tables with readable variable labels.
+# Continuous: mean, min, q25, q50, q75, max, sd, N (#obs, nonmissing).
+# Categorical: top ten categories, count, percentage; show all if fewer than ten.
+# State total sample size, missing-value treatment, and percentage denominators.
+# Replace these comments with code operating on the actual training variables.
+```
+
+```{r testing-descriptive-statistics}
+# TESTING DATA: produce the same summaries for available analysis variables.
+# If the target is absent, summarize available predictors and explain why its
+# summary is unavailable. Never synthesize outcomes to complete a table.
+# State sample size, missing-value treatment, and percentage denominators.
+```
+
+### The actual modeling starts below
+For the remaining blocks, make sure you have followed the guidelines as specified in 
+[專案資料夾結構、檔案命名與文件規範](https://docs.google.com/document/d/1sl6gEFMdmiGsiNjLe17UmZ30xKxq15U0Mb2B-Jvusxg/edit?tab=t.33iie8ybx7s4).
+
+
+```{r model-specification}
+# Include the model specification here.  Please describe the model by stating, including
+# type of method used, the variables included, the hyperparameters, and
+# the method of optimization.
+# Document split units/sizes, seed, validation strategy, and prediction time.
+# For binary tasks, specify the positive class and threshold chosen using
+# training/validation data only. Do not tune with testing outcomes/distributions.
+```
+
+```{r fit-model}
+# Fit using training data. Learn imputation, scaling, encoding, and feature
+# selection within training data (and separately within each CV training fold).
+# Apply fitted transformations to validation/testing data without refitting.
+```
+
+```{r generate-predictions}
+# Generate separate training and testing predictions from the fitted model.
+# For binary tasks retain continuous positive-class scores for AUC as well as
+# thresholded predictions for Recall, Accuracy, F1-Score, and confusion matrices.
+```
+
+```{r training-performance}
+# Report the performance metrics for training data in this block.
+# Continuous target: report MSE AND MAE (RMSE is optional, not a replacement).
+# Plot: (1) prediction distribution; (2) predicted versus actual;
+# (3) predicted versus prediction error. Define error, e.g. actual - predicted.
+# Binary target: report Recall, Accuracy, AUC, F1-Score and a confusion matrix.
+# Compute AUC from continuous positive-class scores, never hard class labels.
+# State sample size, units, positive class, threshold, and undefined-metric reasons.
+# Follow shared figure/table rules and explain the actual findings in prose.
+```
+
+```{r testing-performance}
+# Report the performance metrics for testing data in this block.
+# Use the same required metrics and plots as the training block, labeled TESTING.
+# With no true test labels, provide predictions and feasible distribution plots;
+# explicitly mark label-dependent metrics/plots unavailable rather than inventing them.
+# If an evaluation split has only one class, mark AUC unavailable with a reason;
+# explain other undefined metrics (e.g. recall when no positive outcomes exist).
+# For multiclass/other tasks, document appropriate extensions and averaging.
+# Interpret held-out results separately from training/CV results and backfill
+# Main Findings only from actual outputs. Deliver the Rmd with its actual execution status.
+```
+
+<!-- Completion: execute the Rmd in a clean R session. knitr::knit() may write
+its output and figures to a temporary location for verification; these temporary
+files are not additional deliverables. Inspect the actual training/testing
+results, tables, and figures for readable labels, nonoverlapping text, and
+agreement with the Rmd's takeaways. Deliver the Rmd directly. Produce HTML only
+when separately requested, never as a default export or a condition of completion. -->

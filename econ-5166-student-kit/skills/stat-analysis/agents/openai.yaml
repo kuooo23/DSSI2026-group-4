@@ -1,0 +1,4 @@
+interface:
+  display_name: "統計分析"
+  short_description: "Create a course-format statistical analysis finding"
+  default_prompt: "Use $stat-analysis to produce a template-based Rmd or ipynb analysis with verified results, asking for any missing format or material inputs and defaulting to zh-TW (Traditional Chinese with Taiwan usage) unless I specify another report language."

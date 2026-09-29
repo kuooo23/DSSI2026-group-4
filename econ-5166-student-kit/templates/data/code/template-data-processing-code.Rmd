@@ -1,0 +1,191 @@
+---
+title: "template-process-data"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(error = FALSE)
+# Global options for knitr go here if needed
+## knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+# README
+
+- **Author**: `<AUTHOR NAME>`
+- **Created At**: `<YYYY-MM-DD>`
+- **Last Modified At**: `<YYYY-MM-DD>`
+
+---
+
+## What does this file do?
+
+- `<Describe the processing purpose, unit of observation, and selection rules>`
+- `<Describe joins, recoding, aggregation, and handling of missing data as applicable>`
+- `<If producing train/test files, explain the split and fit preprocessing on training data only>`
+
+---
+
+## What does this file take?
+
+- **Source Data Sets** (one entry per actual file):
+  1. `data/raw/<INPUT_FILE_NAME.csv>`
+     - Input key: `<SOURCE_KEY>`
+     - Description: `<What does this input contain? Include keys and relevant types>`
+     - Documentation: `data/raw/<INPUT_DOCUMENTATION.ipynb-or-Rmd>`
+     - SHA-256: `<expected fingerprint from the exact input inspected before generating this notebook>`
+  2. `<Add each additional raw or upstream processed input and its documentation; do not use a glob>`
+
+---
+
+## What does this file output?
+
+- `data/processed/<OUTPUT_FILE_NAME.csv>`
+  - Output key: `<OUTPUT_KEY>`
+  - Description: `<What does this output contain?>`
+  - Role: `<analysis | train | test>`
+  - Documentation: `data/processed/<OUTPUT_DOCUMENTATION.ipynb-or-Rmd>`
+  - Expected schema and row-count rules: `<Specify the intended result and checks>`
+  - Verification status / SHA-256: `<pending until saved and independently reopened>`
+  - Downstream finding input: `data/processed/<OUTPUT_FILE_NAME.csv>` (same exact file)
+- `<Add each additional output, with its own role, documentation, and verification>`
+
+All paths are relative to the project root, not the operating-system root.
+Replace placeholders and reader/writer options before running. Keep this list,
+the code below, each processed-data document, and `PROJECT.md` Data Artifacts
+consistent. Do not mark planned outputs verified. The scaffold uses CSV; adapt
+both writing and read-back code together for another actual format. Bind every
+input to its inspected SHA-256 before data loading; do not silently accept a
+changed version or replace the expected fingerprint during a normal rerun.
+
+```{r}
+library(readr)
+
+find_project_root <- function(start = getwd()) {
+  candidate <- normalizePath(start, winslash = "/", mustWork = TRUE)
+  repeat {
+    if (file.exists(file.path(candidate, "AGENTS.md")) &&
+        dir.exists(file.path(candidate, "templates"))) return(candidate)
+    parent <- dirname(candidate)
+    if (identical(parent, candidate)) stop("Open this notebook within the student project containing AGENTS.md and templates/.")
+    candidate <- parent
+  }
+}
+PROJECT_ROOT <- find_project_root()
+
+project_file <- function(relative_path, area, must_exist = TRUE) {
+  # Exact project-relative paths only; no first-file search or OS-root /data path.
+  parts <- strsplit(relative_path, "/", fixed = TRUE)[[1]]
+  if (grepl("^(/|~|[A-Za-z]:)", relative_path) || ".." %in% parts ||
+      grepl("<", relative_path, fixed = TRUE) ||
+      !startsWith(relative_path, paste0("data/", area, "/"))) {
+    stop("Replace the placeholder with an exact path inside data/", area, "/: ", relative_path)
+  }
+  path <- file.path(PROJECT_ROOT, relative_path)
+  if (must_exist && (!file.exists(path) || dir.exists(path))) stop("Input file not found: ", path)
+  # Resolve existing ancestors to reject a path that leaves the project via a symlink.
+  ancestor <- path
+  while (!file.exists(ancestor)) ancestor <- dirname(ancestor)
+  resolved <- normalizePath(ancestor, winslash = "/", mustWork = TRUE)
+  allowed <- normalizePath(file.path(PROJECT_ROOT, "data", area), winslash = "/", mustWork = TRUE)
+  if (!startsWith(allowed, paste0(PROJECT_ROOT, "/"))) {
+    stop("data/", area, "/ resolves outside the project root.")
+  }
+  if (!identical(resolved, allowed) && !startsWith(resolved, paste0(allowed, "/"))) {
+    stop("Resolved path leaves data/", area, "/: ", relative_path)
+  }
+  path
+}
+
+sha256_file <- function(path) {
+  if (!requireNamespace("digest", quietly = TRUE)) {
+    stop("Cannot verify input identity: digest is unavailable. Use an available SHA-256 implementation before loading data.")
+  }
+  digest::digest(file = path, algo = "sha256", serialize = FALSE)
+}
+
+verify_input_sha256 <- function(path, expected) {
+  # Bind this run to the exact file inspected when the notebook was prepared.
+  if (!is.character(expected) || length(expected) != 1L || is.na(expected) ||
+      !grepl("^[0-9a-fA-F]{64}$", expected)) {
+    stop("Fill the expected SHA-256 from the inspected input before loading data.")
+  }
+  actual <- sha256_file(path)
+  if (!identical(actual, tolower(expected))) stop("Input changed: identify the new version before loading ", basename(path), ".")
+  actual
+}
+
+```
+
+```{r}
+# Add all real input/output files as named vectors; keep their keys consistent.
+INPUTS <- c("<SOURCE_KEY>" = "data/raw/<INPUT_FILE_NAME.csv>")
+EXPECTED_INPUT_SHA256 <- c("<SOURCE_KEY>" = "<INSPECTED_INPUT_SHA256>")
+OUTPUTS <- c("<OUTPUT_KEY>" = "data/processed/<OUTPUT_FILE_NAME.csv>")
+# Configure col_types, locale, and na for each file if defaults lose meaning.
+INPUT_OPTIONS <- list("<SOURCE_KEY>" = list())
+OUTPUT_READ_OPTIONS <- list("<OUTPUT_KEY>" = list())
+read_dataset <- function(path, options) {
+  if (is.null(options)) options <- list()
+  result <- do.call(readr::read_csv, c(list(file = path, show_col_types = FALSE), options))
+  stopifnot(nrow(readr::problems(result)) == 0L)
+  result
+}
+input_paths <- vapply(INPUTS, function(rel) {
+  area <- strsplit(rel, "/", fixed = TRUE)[[1]][2]
+  if (is.na(area) || !area %in% c("raw", "processed")) stop("Expected a raw or upstream processed input.")
+  project_file(rel, area)
+}, character(1))
+output_paths <- vapply(OUTPUTS, project_file, character(1), area = "processed", must_exist = FALSE)
+stopifnot(!anyDuplicated(output_paths), !any(output_paths %in% input_paths))
+if (any(file.exists(output_paths))) stop("Review existing outputs before replacing them.")
+stopifnot(setequal(names(EXPECTED_INPUT_SHA256), names(INPUTS)), !anyDuplicated(names(EXPECTED_INPUT_SHA256)))
+input_fingerprints <- vapply(names(input_paths), function(key) {
+  verify_input_sha256(input_paths[[key]], EXPECTED_INPUT_SHA256[[key]])
+}, character(1))
+inputs <- setNames(lapply(names(INPUTS), function(key) read_dataset(input_paths[[key]], INPUT_OPTIONS[[key]])), names(INPUTS))
+for (key in names(inputs)) {
+  print(list(input = key, data_path = INPUTS[[key]], rows = nrow(inputs[[key]]),
+             schema = vapply(inputs[[key]], function(x) paste(class(x), collapse = "/"), character(1)),
+             sha256 = input_fingerprints[[key]]))
+}
+```
+
+```{r}
+# Replace this chunk with documented transformations and data-specific checks.
+# Keep inputs unchanged; create one data frame for each OUTPUTS key:
+# outputs <- list("<OUTPUT_KEY>" = prepared_dataframe, ...)
+# Check merge coverage/cardinality, exclusions, missingness, keys, and units
+# as relevant. For train/test, check the declared split and leakage boundary.
+stop("Implement and check the actual transformations before writing any output.")
+```
+
+```{r}
+# Run only after the transformation chunk has produced and checked `outputs`.
+stopifnot(setequal(names(outputs), names(OUTPUTS)))
+for (key in names(outputs)) {
+  stopifnot(is.data.frame(outputs[[key]]), !anyDuplicated(names(outputs[[key]])))
+}
+verification <- list()
+for (key in names(outputs)) {
+  path <- output_paths[[key]]
+  dir.create(dirname(path), recursive = TRUE, showWarnings = FALSE)
+  if (file.exists(path)) stop("Output already exists; review it before replacing: ", path)
+  frame <- outputs[[key]]
+  readr::write_csv(frame, path)
+  reread <- read_dataset(path, OUTPUT_READ_OPTIONS[[key]])
+  stopifnot(identical(names(reread), names(frame)), nrow(reread) == nrow(frame))
+  # Account for intentional storage types explicitly; do not skip value checks.
+  stopifnot(isTRUE(all.equal(as.data.frame(frame), as.data.frame(reread), check.attributes = FALSE)))
+  fingerprint <- sha256_file(path)
+  verification[[key]] <- list(data_path = OUTPUTS[[key]], rows = nrow(reread),
+                              schema = vapply(reread, function(x) paste(class(x), collapse = "/"), character(1)),
+                              sha256 = fingerprint,
+                              status = "read-back checks passed")
+  print(verification[[key]])
+}
+for (key in names(input_paths)) {
+  stopifnot(identical(sha256_file(input_paths[[key]]), input_fingerprints[[key]]))
+}
+# Finish each processed-data document and Data Artifacts row from actual results;
+# if a write/read-back fails or SHA-256 is unavailable, leave verification pending.
+# Findings must read the exact output path with matching role and SHA-256.
+```

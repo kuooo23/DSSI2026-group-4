@@ -1,0 +1,4 @@
+interface:
+  display_name: "資料整理"
+  short_description: "Prepare documented research data in course format"
+  default_prompt: "Use $data-preparation to inspect my data and prepare documented analysis inputs, asking for any missing format or material inputs and defaulting to zh-TW (Traditional Chinese with Taiwan usage) unless I specify another report language."

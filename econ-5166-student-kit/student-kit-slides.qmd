@@ -1,0 +1,731 @@
+---
+title: "ECON 5166 學生研究工作包"
+subtitle: "資料整理與研究成果的操作方式"
+lang: zh-TW
+format:
+  revealjs:
+    theme: simple
+    width: 1280
+    height: 720
+    margin: 0.07
+    center: false
+    slide-number: c/t
+    transition: none
+    background-transition: none
+    controls: true
+    progress: true
+    hash: true
+    history: false
+    navigation-mode: linear
+    menu: true
+    overview: true
+    code-copy: true
+    code-overflow: wrap
+    embed-resources: true
+    auto-stretch: false
+    slide-level: 2
+    include-in-header:
+      text: |
+        <style>
+        :root { --r-main-font: "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif; --r-heading-font: var(--r-main-font); --r-main-font-size: 30px; --r-main-color: #243649; --r-heading-color: #142b40; --r-background-color: #fafbf9; --r-link-color: #126f79; --r-link-color-hover: #09515a; --r-selection-background-color: #cce8e4; }
+        .reveal { font-weight: 400; }
+        .reveal .slides { text-align: left; }
+        .reveal h1 { font-size: 2.05em; font-weight: 700; line-height: 1.22; }
+        .reveal h2 { font-size: 1.48em; font-weight: 700; line-height: 1.22; margin: 0 0 .7em; padding-bottom: .32em; border-bottom: 3px solid #147b81; }
+        .reveal h3 { font-size: 1.02em; font-weight: 650; color: #126f79; margin: .2em 0 .6em; }
+        .reveal p, .reveal li { line-height: 1.42; }
+        .reveal p { margin: .55em 0; }
+        .reveal ul, .reveal ol { margin-left: 1.05em; }
+        .reveal li { margin-bottom: .38em; }
+        .reveal strong { color: #102c43; font-weight: 700; }
+        .reveal code { color: #12646c; background: #eaf1ef; border-radius: 3px; padding: .06em .16em; font-size: .86em; overflow-wrap: anywhere; }
+        .reveal pre { width: 100%; margin: .5em 0; padding: .55em .7em; box-sizing: border-box; box-shadow: none; border-left: 4px solid #147b81; background: #edf2f1; font-size: .73em; line-height: 1.48; }
+        .reveal pre code { background: transparent; color: #213b4c; padding: 0; max-height: none; white-space: pre-wrap; overflow-wrap: anywhere; }
+        .reveal table { width: 100%; margin: .4em 0; font-size: .8em; line-height: 1.38; }
+        .reveal table th { color: #12646c; border-bottom: 2px solid #bfd0cd; }
+        .reveal table td, .reveal table th { padding: .45em .5em; vertical-align: top; }
+        .reveal table td { border-bottom: 1px solid #dce4e2; }
+        .reveal .columns { gap: 1.2em; }
+        .reveal .column { min-width: 0; }
+        .reveal .lead { font-size: 1.24em; line-height: 1.45; margin: .6em 0 1em; max-width: 26em; }
+        .reveal .small { font-size: .74em; color: #50616e; line-height: 1.45; }
+        .reveal .small p { margin: .45em 0; }
+        .reveal .emphasis { border-left: 4px solid #147b81; padding: .1em 0 .1em .7em; margin-top: 1em; }
+        .reveal .sequence { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.1em; margin: 1.4em 0; }
+        .reveal .sequence > div { border-top: 2px solid #a5c6c3; padding-top: .5em; }
+        .reveal .step-number { color: #147b81; font-size: 1.6em; font-weight: 700; margin: 0 0 .25em; }
+        .reveal .subtitle { font-size: 1.2em; color: #50616e; margin-top: 1em; }
+        .reveal #title-slide { text-align: left; padding-top: 1.9em; }
+        .reveal #title-slide h1 { max-width: 17em; border-left: 7px solid #147b81; padding-left: .5em; }
+        .reveal #title-slide .subtitle { padding-left: 1em; }
+        .reveal .slide-number { font-size: 16px; background: transparent; color: #526b75; }
+        .reveal .progress { height: 4px; color: #147b81; }
+        .reveal .compact table { font-size: .72em; }
+        .reveal .compact pre { font-size: .69em; }
+        .reveal .notes { text-align: left; }
+        </style>
+execute:
+  enabled: false
+---
+
+## 今天要完成的操作 {#learning-goals}
+
+::: {.lead}
+用一份資料啟動任務，找到產出，確認後續分析接到正確的資料。
+:::
+
+1. 找到資料、技能與範本的位置
+2. 說明研究問題，指定需要的成果
+3. 檢查資料來源、執行結果與交付檔案
+4. 在本組 repo 手動 commit、push，再核對 GitHub
+
+::: {.notes}
+供教師上課介紹工作包。主內容約 30 至 35 分鐘，另安排 8 分鐘實作，可依班級調整。附錄供選講或課後查詢。開課前先開啟學生包根目錄與一份範本。本簡報不執行資料處理程式。範例檔名與人物皆為教學示意。
+
+本地依據：AGENTS.md、README.md、PROJECT.md、FINDING-RULES.md 與相關 SKILL.md。簡報格式：https://quarto.org/docs/presentations/revealjs/ 。
+
+先問學生手上有研究構想、原始資料，還是整理好的資料。不同起點可以使用不同技能，不要求每組把所有技能跑過一次。
+:::
+
+## 工作包中的分工 {#roles}
+
+:::: {.columns}
+::: {.column width="48%"}
+### 學生提供
+
+- 想回答的研究問題
+- 資料來源與變數意義
+- 會影響結果的研究判斷
+- 自行填寫角色分工，確認產出
+- 在 VS Code 親自 commit 與 push
+:::
+::: {.column width="48%"}
+### AI 協助
+
+- 讀取適用的技能與範本
+- 撰寫文件與程式
+- 在可用環境中執行與檢查
+- 說明結果，不確定時先討論
+:::
+::::
+
+::: {.notes}
+以收入為例：月收入或年收入、稅前或稅後，需要來源或學生說明。AI 不能只看欄名就替研究者決定。研究定義、資料處理、模型設定或作者不確定時，先與學生討論，再做依賴答案的工作；不受影響的部分可繼續。分工由學生填寫或明確確認，AI 不自行指派人員或補上職責。若環境缺套件或執行失敗，文件要記錄具體狀態。
+:::
+
+## 本組 GitHub repo 的準備 {#repository-setup}
+
+1. 學生在 GitHub 建立本組的空 repo
+2. 在 VS Code 執行 **Git: Clone**，貼上 repo URL 並開啟
+3. 將完整學生包的內容複製到 repo 根目錄，含隱藏項目
+4. 核對本組 `origin` 與分支，親自完成第一次 commit、push
+
+::: {.small}
+根目錄直接放 `AGENTS.md`、`CLAUDE.md`、`skills/`、`templates/`。保留 `.claude/`、`.gitignore`，不多包一層資料夾。
+:::
+
+::: {.notes}
+學生準備 GitHub 帳號、Git 與 VS Code。GitHub 的 New repository 先選好 Owner、名稱，依教師要求選擇公開或私人，建立空 repo，不先加入 README、gitignore 或 license。Clone 後保留該 repo 自己的 .git，不從來源資料夾複製或覆蓋 .git。組員各用自己的 Git 身分與 GitHub 登入 clone 共用 repo。已 clone 則直接開啟，勿重複建立 repo。PROJECT.md 的 Repository Context 只記錄確認的 repo、分支及實際提交狀態。完整步驟見 README。
+
+官方依據：https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository 與 https://code.visualstudio.com/docs/sourcecontrol/quickstart 。
+:::
+
+## 專案根目錄 {#project-root}
+
+在 VS Code 與 AI 工具中開啟 **clone 後的本組 repo 根目錄**。
+
+```text
+本組repo/
+├── AGENTS.md        AI 的共同操作規則
+├── CLAUDE.md        Claude 入口，匯入共同規則
+├── .claude/skills/  Claude 技能入口
+├── PROJECT.md       本組研究問題、偏好與資料紀錄
+├── skills/          各項任務的做法
+├── templates/       文件的標準格式
+├── data/            原始資料、處理程式、整理後資料
+├── finding/         統計、預測與模擬成果
+└── report/          提案、報告與選用的週報
+```
+
+::: {.notes}
+示範在可讀寫專案檔案的 AI 工具中開啟本組 repo，例如 Codex。確認看得到 AGENTS.md、CLAUDE.md、skills 與 templates。模型選用入口的規則見 README，學生可使用 Claude 或 OpenAI 模型。此圖只列主要位置，其他資料夾見附錄。
+:::
+
+## 技能與範本 {#skills-and-templates}
+
+| 位置 | 用途 | 例子 |
+|---|---|---|
+| `skills/` | 告訴 AI 如何處理任務 | `stat-analysis/SKILL.md` |
+| `templates/` | 保留文件章節與欄位 | `finding/template-stat-analysis.ipynb` |
+| `finding/` | 儲存本組實際成果 | `study_hours.ipynb` 或 `study_hours.Rmd` |
+
+::: {.emphasis}
+你可以用自然語言提出任務，也可以指定 `skills/某技能/SKILL.md`。
+:::
+
+::: {.notes}
+打開 stat-analysis 的 SKILL.md，再打開對應範本，比較做法與成品格式。技能不必出現在介面選單中，AI 仍可依專案指引讀取。實際成果放入工作目錄，保留 templates 的可重複使用內容。
+:::
+
+## 語言與工具選擇 {#preferences}
+
+:::: {.columns}
+::: {.column width="48%"}
+### 報告語言
+
+預設 **繁體中文、台灣用語**。
+
+已指定其他語言時沿用。
+範本原有的英文欄位名稱保留。
+:::
+::: {.column width="48%"}
+### 分析格式
+
+- Python 使用 `.ipynb`
+- R 使用 `.Rmd`
+
+未指定時，AI 會先詢問。
+:::
+::::
+
+::: {.small}
+提案與純連結紀錄使用 Markdown，不需要先選 R 或 Python。
+:::
+
+::: {.notes}
+已在對話或 PROJECT.md 指定工具，就不用重問。指定修改既有 Notebook 也已確定格式。等待必要工具答案時，AI 可先唯讀檢查，不先選工具跑分析。學生說「你幫我選」時可選擇並說明。研究問題或變數定義等必要資訊仍可能需要補充。
+:::
+
+## 第一則任務指令 {#first-prompt}
+
+```text
+請讀取這個專案的 AGENTS.md 與適用技能。
+我想研究每週讀書時數與考試成績的關聯。
+資料已放在 data/raw/study.csv，每列代表一位學生。
+hours 是每週讀書時數，score 是考試成績。
+請使用 Python／Jupyter Notebook。作者：本組成員姓名。
+先檢查資料與需要補充的定義，再完成資料準備。
+```
+
+::: {.small}
+這是指令範例。請換成本組實際的問題、檔名、欄位定義與作者。
+:::
+
+::: {.notes}
+請學生指出指令包含哪些資訊。資料來源、期間、缺失值意義尚未提供時可接著詢問。此指令先要求資料準備，還未要求正式 finding。若只要先看資料，可說「先唯讀檢查，先不要修改檔案」。
+:::
+
+## 資料處理的四個階段 {#data-flow}
+
+::::: {.sequence}
+:::: {.stage}
+::: {.step-number}
+01
+:::
+
+**原始資料說明**
+
+`data/raw/`
+::::
+
+:::: {.stage}
+::: {.step-number}
+02
+:::
+
+**處理程式**
+
+`data/code/`
+::::
+
+:::: {.stage}
+::: {.step-number}
+03
+:::
+
+**整理檔與說明**
+
+`data/processed/`
+::::
+
+:::: {.stage}
+::: {.step-number}
+04
+:::
+
+**分析成果**
+
+`finding/`
+::::
+:::::
+
+`data-preparation` 會依任務需要，串接前三個階段。
+
+::: {.notes}
+用同一份 study.csv 說明各階段。原始檔保留，清理程式留下紀錄，整理檔重新讀取驗證，最後分析使用它。若已有適合的整理檔與來源說明，可直接驗證登記，不必重做全部上游。
+:::
+
+## 原始資料說明 {#raw-data}
+
+[raw-data-documentation](skills/raw-data-documentation/SKILL.md)
+
+- 記錄來源、觀測單位、期間與變數定義
+- 顯示實際樣本、摘要與已知問題
+- 說明文件放在 `data/raw/`，保留原始檔
+
+```text
+請用 raw-data-documentation，說明 data/raw/study.csv。
+沿用本組的工具偏好，依 raw 範本產出資料說明。
+未知的來源資訊請標示待補。
+```
+
+::: {.notes}
+觀測單位指一列代表什麼，例如一位學生、一次交易或一個縣市年度。原始說明可以指出重複與缺失，不直接刪除。看過原始檔，不代表完成清理。
+:::
+
+## 清理、合併與切分 {#processing}
+
+[data-processing](skills/data-processing/SKILL.md)
+
+- 處理 Notebook／Rmd 放在 `data/code/`
+- 衍生資料存入 `data/processed/`
+- 寫檔後重新讀取，核對筆數、欄位與相關檢查
+
+```text
+請用 data-processing，移除 study.csv 中完全相同的重複列。
+同一個 id 若出現內容不同的紀錄，先列出問題供我們確認。
+處理程式與每一步影響的筆數請留下紀錄。
+```
+
+::: {.notes}
+此例明確授權刪除整列完全相同的重複資料。相同 id 但內容不同，要依來源決定。大量合併、轉形與缺失處理放 data/code。finding 只做允許的簡單篩選與少量變數生成。
+:::
+
+## 整理後資料的說明與驗證 {#processed-data}
+
+[processed-data-documentation](skills/processed-data-documentation/SKILL.md)
+
+| 要核對的內容 | 為什麼需要 |
+|---|---|
+| 實際檔案與處理程式 | 知道分析資料怎麼產生 |
+| 觀測單位、欄位與識別鍵 | 確認每列意義與資料結構 |
+| 樣本、摘要與可執行檢查 | 看見處理後的結果與限制 |
+| analysis／train／test 用途 | 讓後續分析選對樣本 |
+
+::: {.notes}
+文件使用 data/processed 正式範本，保留 Data Description、Sample、Summary Stats、Assertions 等欄位與區塊。Assertions 是有資料定義依據的檢查，不任意要求所有欄位都不能缺失。外部整理檔沒有本地產生程式時，保留真實來源並說明，不假造程式。
+:::
+
+## 後續分析如何找到資料 {#data-handoff}
+
+`PROJECT.md` 的 **Data Artifacts** 保存資料紀錄。
+
+:::: {.columns}
+::: {.column width="48%"}
+### 每份資料的紀錄
+
+實際路徑、用途、說明文件、產生程式與檢查結果。
+:::
+::: {.column width="48%"}
+### 分析前的核對
+
+確認檔案存在、結構適用，而且內容版本相符。
+:::
+::::
+
+::: {.emphasis}
+資料版本改變時，先確認新資料並更新紀錄；有要求重新分析時，再更新成果。
+:::
+
+::: {.notes}
+AI 記錄 SHA-256 作為檔案內容辨識值。學生不必自己計算或手填。辨識值相同只證明內容相同，不代表資料品質。train/test 各有紀錄，不依修改時間或第一個 CSV 選資料。只更新索引不代表舊 finding 已重跑。
+:::
+
+## 統計分析任務 {#stat-analysis}
+
+[stat-analysis](skills/stat-analysis/SKILL.md)
+
+```text
+請用 stat-analysis，沿用 PROJECT.md 中已驗證的 analysis 資料。
+研究問題：每週讀書時數與考試成績的關聯。
+請先提供相關變數的敘述統計，再估計兩者的關聯。
+依 finding 範本交付本組選定的 .ipynb 或 .Rmd，保留已確認的發現。
+```
+
+成果包含背景、讀檔程式、敘述統計、分析結果與解釋。
+
+::: {.small}
+正式統計與預測 finding 的分析資料，只從 `data/processed/` 讀取。
+:::
+
+::: {.notes}
+示範 template-stat-analysis 的 Background 欄位。例子研究關聯，未指定或證明因果。方法需配合問題並說明假設。實際使用的 outcome、解釋變數、控制、分組與權重都需納入適用摘要。
+:::
+
+## 統計成果的檢閱重點 {#stat-review}
+
+| 部分 | 你應該看得到 |
+|---|---|
+| 敘述統計 | 數值變數的分布與筆數，類別的次數與比例 |
+| 圖表 | 標題、清楚標籤、樣本數與文字解釋 |
+| 估計結果 | 適用的 95% 信賴區間與推論說明 |
+| 迴歸 | 樣本數、應變數平均、標準誤與參考組 |
+
+::: {.small}
+數值摘要：mean、min、q25、q50、q75、max、sd、N。類別摘要：前十大類別的筆數與比例。
+:::
+
+::: {.notes}
+完整規範見 FINDING-RULES.md。比例交代分母，缺失數與有效 N 要清楚。圖中平均或係數等估計量附 95% 信賴區間。兩組比較表要有各組平均與標準差、平均差和 t 檢定 p 值。迴歸預設 HC1 等異質變異穩健標準誤，群聚設計需用適當群聚標準誤，並交代參考組與固定效果。顯著符號為 * p < .10、** p < .05、*** p < .01。
+:::
+
+## 預測模型任務 {#prediction}
+
+[prediction-model](skills/prediction-model/SKILL.md)
+
+```text
+請用 prediction-model，依 PROJECT.md 找到 train 與 test 資料。
+目標是預測考試成績，使用考試前可取得的讀書時數。
+沿用現有切分，只使用訓練資料估計與選擇模型。
+請分別報告訓練與測試結果，交付本組選定的 .ipynb 或 .Rmd。
+```
+
+**測試資料用來評估尚未看過的樣本。**
+
+::: {.notes}
+若只有一份資料，先建立適合的切分並存 data/processed。時間資料與重複個體注意切分單位，不一律隨機切列。補值、標準化、編碼與特徵選擇等需估計的步驟，只在訓練資料、交叉驗證訓練折中學習，再套到保留資料。
+:::
+
+## 預測的交付內容 {#prediction-output}
+
+| 預測目標 | 指標 | 圖形 |
+|---|---|---|
+| 連續變數 | MSE、MAE | 預測分布、預測與真實值、預測與誤差 |
+| 二元變數 | Recall、Accuracy、AUC、F1 | 混淆矩陣 |
+
+訓練與測試結果分開呈現，建模前也分開提供敘述統計。
+
+::: {.emphasis}
+測試資料沒有真實答案時，文件要說明哪些指標無法計算。
+:::
+
+::: {.notes}
+RMSE 等額外指標不取代 MSE 和 MAE。二元分類定義正類與門檻，AUC 使用連續機率或分數。單一類別或零分母時不捏造指標。請學生說明預測當下可以知道哪些欄位。
+:::
+
+## 研究提案 {#proposal}
+
+[proposal-writer](skills/proposal-writer/SKILL.md) 依六章節範本產出 `report/*.md`。
+
+:::: {.columns}
+::: {.column width="48%"}
+1. 專案敘述
+2. 已有的原始資料
+3. 主要分析資料需求
+:::
+::: {.column width="48%"}
+4. 假說與預期結果
+5. 預期限制
+6. 角色分工（學生填寫）
+:::
+::::
+
+```text
+請依 proposal 範本整理本組構想、已有資料與學生填寫的分工。
+資料或方法不確定時先與我們討論，未收到的分工保留待學生填寫。
+```
+
+::: {.notes}
+提案可使用真實 raw 樣本，不需先完成全部分析。第一章保留研究問題、研究動機、資料來源與研究方法四子節。預期結果是假說或示意，不可當作發現。角色分工由學生填寫，AI 只整理已提供或明確確認的內容；不確定的事項先討論，草稿可保留待補，但不能據此先執行依賴未知設定的分析。資料應用專案需附簡單介面示意；開發與部署另屬其他任務。正式範本 templates/report/econ-5516-proposal-template.md。
+:::
+
+## 任務不同，交付格式也不同 {#deliverable-formats}
+
+| 任務 | 主要交付 |
+|---|---|
+| 統計／預測分析 | 選定的 `.ipynb` 或 `.Rmd` |
+| 原始／整理後說明、資料處理 | 選定的 `.ipynb` 或 `.Rmd` |
+| 數值模擬 | 原範本的 `.ipynb` 或 `.Rmd` |
+| 提案／純外部紀錄 | `.md` |
+| Stata 正式分析 | 同名 `.md`、`.do` 與 Google Doc |
+
+::: {.small}
+教師直接驗收 `.ipynb`／`.Rmd`，不要求 HTML；另有匯出要求時才產生 HTML。
+:::
+
+::: {.notes}
+教師最新指示已取代原貼文的同名 HTML 要求。Jupyter 從乾淨 kernel 執行並保留輸出；Rmd 可在乾淨 R 程序用 knitr::knit() 到暫存位置核對結果，再把已確認的發現寫回 Rmd，暫存驗證產物不需交付。Stata Google Doc 按程式段落放相對應實際結果。只有 .dta 不代表選用 Stata。純連結登記維持 Markdown。此頁不要求課堂實跑 Stata。
+:::
+
+## 模擬與外部資料紀錄 {#simulation-external}
+
+:::: {.columns}
+::: {.column width="48%"}
+### simulation-runner
+
+提供資料生成方式、參數與想比較的方法。
+
+正式模擬成果放在 `finding/`。
+:::
+::: {.column width="48%"}
+### external-file
+
+提供原件名稱、連結及內容說明。
+
+索引放在 `finding/` 或 `report/`。
+:::
+::::
+
+::: {.small}
+外部紀錄沿用原件主檔名，例如 `review.pdf` → `review.md`。原件日期未知時標示待補。
+:::
+
+::: {.notes}
+模擬可依 DGP 生成人工資料，不必先有實證資料。設計討論不一定要建立 Notebook。external-file 保存外部成果索引，不能以其 Markdown 摘要取代正式分析。report 的外部簡報範本另有逐字稿欄，未知時如實記錄。
+:::
+
+## 資料更新後的接續方式 {#updates}
+
+```text
+這次收到 study.csv 的修正版，來源已確認，更新內容如下：……
+請檢查需要更新的資料處理與說明，重新驗證整理後資料。
+請重跑 finding/study_hours.ipynb，保留本次輸出並更新發現。
+其他既有 finding 若受影響，請列出來讓我們確認。
+```
+
+::: {.emphasis}
+新資料完成驗證後，仍要重新執行使用它的分析，成果才會更新。
+:::
+
+::: {.notes}
+更新時說明來源與原因。版本不符的停止訊息要求辨認資料，不能只改驗證值讓程式通過。此指令明確授權重跑指定 finding，其他受影響文件列出來，不默默重跑全部成果。
+:::
+
+## 交付前的確認 {#handoff-check}
+
+- 能從文件找到資料來源與分析樣本
+- 有實際執行結果，數字與文字說明一致
+- 選定的 `.ipynb`／`.Rmd` 有完整程式與已確認的發現
+- 圖表清楚，限制與尚未完成的部分可見
+- 確認 GitHub 提交與推送的實際狀態
+
+::: {.notes}
+統計／預測提交到 GitHub 的成果是選定的 .ipynb 或 .Rmd；Stata 則提交 .md 與 .do。ipynb 保留執行輸出，Rmd 的文字發現與圖表說明須以實際執行結果核對。AI 完成可檢閱的檔案與說明，學生自行在 VS Code stage、commit、push。本地檔案生成不代表已提交或已推送。一般 finding 可用指定、既有或描述性檔名，沒有會議日期前綴要求。Created At 等欄位仍填寫。週報仍可依會議日期命名。
+:::
+
+## 學生在 VS Code 提交成果 {#student-commit-push}
+
+1. 在 **Source Control** 確認 repo、分支，逐檔查看 diff
+2. 對本次成果按 **+**，檢查 **Staged Changes**
+3. 填寫成果說明，再按 **Commit**，保存本機版本
+4. 從 **…** 選 **Push**，推送到本組 GitHub repo
+5. 到 GitHub 的正確分支核對 commit SHA 與檔案
+
+::: {.emphasis}
+學生親自操作。AI 可協助檢查變更與擬定 commit 訊息。
+:::
+
+::: {.notes}
+只 stage 本次合適成果與必要支援檔，不把憑證、個資、無權上傳的資料、暫存或無關修改一併加入。首次若顯示 Publish Branch，確認既有本組 origin 與分支後由學生操作，不另建 repo。Sync Changes 會先 pull 再 push，有衝突或推送遭拒應先處理，不能用 force push 略過。新一輪工作前由學生確認本機狀態再 pull 組員更新。AI 不代按按鈕或執行 Git 寫入操作。
+
+官方按鈕與行為：https://code.visualstudio.com/docs/sourcecontrol/quickstart 。
+:::
+
+## 貢獻證據與回填方式 {#contribution-records}
+
+**所有貢獻都要記錄成 commit**，包含文件與專案紀錄。
+
+| 目前證據 | `PROJECT.md` 的狀態 |
+|---|---|
+| 成果尚未 commit | 待提交 |
+| reference 未核對內容 | 待核對 |
+| 本機 commit 已核對 | 真實 SHA，加上待 push／遠端待核對 |
+| GitHub 正確分支已核對同一 commit | 真實連結／SHA，加上已 push |
+
+::: {.small}
+學生提供 commit，AI 唯讀核對後回填。成果 A 的索引更新交由學生在下一個 commit B 提交，索引仍指向 A。
+:::
+
+::: {.notes}
+Key Contributions 保留姓名、實際成果及 commit reference。檔案連結不能取代 commit，commit 次數不是貢獻評分。外部成果提交有內容的說明或連結索引。只有本機 SHA、學生自述已推送或無未提交變更，不足以由 AI 宣稱遠端已核對。無法查看遠端時保留來源與遠端待核對。
+
+回填採兩次提交：成果 commit A 完成後，AI 查看其 diff，將 A 回填 PROJECT.md，學生再檢閱並提交索引為 B、push。B 已留下索引維護的紀錄，不必為 B 另開僅引用 B 的索引列，避免無限追逐自己的 SHA。獨立實質的專案脈絡更新仍按貢獻記錄。每次交付分別說明成果與索引是否已提交。
+:::
+
+## 課堂練習：一份資料的準備 {#practice}
+
+**時間建議：8 分鐘**
+
+1. 開啟已建立並 clone 的本組 repo，確認主要資料夾
+2. 放入一份資料，說明一列代表什麼
+3. 指定 R 或 Python，請 AI 完成適用的資料準備
+4. 找到產出的文件與 `PROJECT.md` 資料紀錄
+5. 學生檢閱後自行 commit、push，到 GitHub 核對
+
+::: {.small}
+尚無資料的小組，可用附錄的人工資料練習。這次先完成資料準備。
+:::
+
+::: {.notes}
+兩人一組，一人輸入指令、一人核對定義與產物位置。巡視時看資料路徑、模板、執行狀態與後續整理檔。若環境缺依賴，可先完成明確記錄的待執行文件，不冒稱成功。
+:::
+
+## 練習回顧 {#practice-review}
+
+::: {.lead}
+下一位組員開啟專案，能找到正確資料並接著分析嗎？
+:::
+
+請各組指出：
+
+- 實際整理檔與對應說明
+- 產生它的處理 Notebook／Rmd
+- 已完成的檢查與尚待處理的問題
+
+::: {.notes}
+追問：同名檔案內容變了，finding 會怎樣？應停止並核對版本，不找替代檔。只更新 PROJECT.md 是否等於 Rmd／ipynb 的發現也更新？否，仍要執行分析並核對結果。
+:::
+
+## 課後使用入口 {#next-task}
+
+每次任務交代 **資料或文件位置、任務目的與預期成果**。
+
+```text
+請沿用 PROJECT.md 的設定。
+這次的任務是……，可使用的資料或文件是……
+請依適用技能與範本完成，並說明產出位置及執行狀態。
+```
+
+[README](README.md) 提供使用方式，[共用規則](FINDING-RULES.md) 說明交付要求。
+
+::: {.notes}
+主內容到此結束。附錄依課堂需要選講或留供課後查詢。學生仍需確認研究判斷與成果內容。
+:::
+
+## 附錄：資料與成果技能 {#appendix-skills-data .compact}
+
+| 技能 | 使用時機 |
+|---|---|
+| [data-preparation](skills/data-preparation/SKILL.md) | 串接資料準備階段 |
+| [raw-data-documentation](skills/raw-data-documentation/SKILL.md) | 原始資料說明 |
+| [data-processing](skills/data-processing/SKILL.md) | 清理、合併與切分 |
+| [processed-data-documentation](skills/processed-data-documentation/SKILL.md) | 整理檔說明與驗證 |
+| [stat-analysis](skills/stat-analysis/SKILL.md) | 統計分析 |
+| [prediction-model](skills/prediction-model/SKILL.md) | 預測與樣本外評估 |
+| [proposal-writer](skills/proposal-writer/SKILL.md) | 研究提案 |
+| [simulation-runner](skills/simulation-runner/SKILL.md) | 數值模擬 |
+| [external-file](skills/external-file/SKILL.md)、[stata-analysis](skills/stata-analysis/SKILL.md) | 外部索引與 Stata 專用工作 |
+
+::: {.notes}
+供快速查詢，不需逐項朗讀。主流程已介紹資料、統計與預測，其餘依研究需要使用。
+:::
+
+## 附錄：文獻與研究簡報 {#appendix-skills-research}
+
+| 技能 | 用途 |
+|---|---|
+| [paper-search](skills/paper-search/SKILL.md) | 尋找與分類文獻 |
+| [paper-note](skills/paper-note/SKILL.md) | 在 references/ 整理文獻筆記 |
+| [beamer-slides](skills/beamer-slides/SKILL.md) | 建立 Beamer 簡報 |
+| [revise-beamer-slides](skills/revise-beamer-slides/SKILL.md) | 依註解修改既有 Beamer 簡報 |
+
+::: {.notes}
+paper-search 不預設一定存檔；需要保留閱讀筆記時使用 paper-note。Beamer 技能可協助學生準備成果報告，簡報通常放 deliverable/slides。本次 Qmd 簡報是指定格式，不改變 Beamer 技能用途。
+:::
+
+## 附錄：專案紀錄與小組協作 {#appendix-skills-collaboration}
+
+| 技能 | 用途 |
+|---|---|
+| [maintain-data-documentation](skills/maintain-data-documentation/SKILL.md) | 維護既有資料文件與資料索引 |
+| [maintain-project-context](skills/maintain-project-context/SKILL.md) | 更新研究脈絡與已確認的貢獻紀錄 |
+
+小組可自行填寫 [週報範本](templates/weekly-meeting.md)，記錄進度、決策與後續行動。
+
+::: {.notes}
+週報由成員自行填寫與確認。資料文件維護沿用既有格式；專案維護只記錄已確認的脈絡與責任，貢獻仍需實際 commit 證據。meeting-minutes 可另行安裝以整理會議筆記，尚未包含在學生包內，使用方式見 README。
+:::
+
+## 附錄：其他資料夾與紀錄 {#appendix-folders}
+
+| 位置 | 用途 |
+|---|---|
+| `references/`、`attachments/` | 文獻、筆記與相關圖片 |
+| `deliverable/paper/` | 正式論文 |
+| `deliverable/slides/`、`deliverable/app/` | 簡報與應用程式成果 |
+| `data/temp/` | 可重新產生的中間檔 |
+
+::: {.notes}
+小組使用週報時，自行確認其中的 Next Actions。TEAM、ROADMAP、BACKLOG、DECISIONS、RISKS 等 Markdown 文件依協作需求自行維護，空白學生包未預先建立，不說成已存在。
+:::
+
+## 附錄：人工資料練習 {#appendix-example}
+
+以下為人工資料，可存成 `data/raw/classroom-demo.csv`。
+
+:::: {.columns}
+::: {.column width="42%"}
+```csv
+id,hours,score
+1,2,55
+2,4,68
+3,6,75
+4,8,89
+4,8,89
+5,,62
+6,3,60
+```
+:::
+::: {.column width="54%"}
+每列代表一位假想學生。
+
+- hours：每週讀書時數
+- score：考試成績
+- 有一列完全重複資料
+- 有一筆讀書時數缺失
+:::
+::::
+
+::: {.small}
+先請 AI 說明資料，再討論清理方式。人工資料僅供操作練習。
+:::
+
+::: {.notes}
+不從這個極小人工樣本解讀實質結論。示範原始檔保留、重複與缺失辨識。若要求處理，可明確說去除整列完全重複，先保留並記錄缺失、不任意補值。比較處理前後筆數與文件。
+:::
+
+## 附錄：常見狀況 {#appendix-troubleshooting}
+
+| 狀況 | 接續方式 |
+|---|---|
+| AI 詢問工具格式 | 指定 Rmd 或 ipynb，之後沿用 |
+| 資料內容版本不符 | 說明來源與變更，再重新驗證 |
+| 分析文件沒有實際結果 | 檢查執行狀態，完成執行並核對發現 |
+| 只有 .md 分析摘要 | 要求正式統計／預測 `.Rmd` 或 `.ipynb` |
+| 還沒有完整資料 | 可先寫提案，未知處標示待補 |
+| 想先看而不改檔 | 明確要求「唯讀檢查，先不要修改」 |
+
+::: {.notes}
+請學生保留實際錯誤訊息，讓 AI 辨認缺資料、格式、套件或版本問題。工具格式與報告語言不同，語言未指定時已有台灣繁體中文預設。
+:::
+
+## 附錄：授課操作與編輯 {#appendix-presenter}
+
+- 在 RStudio 開啟 `student-kit-slides.qmd`，按 Preview 預覽
+- 左右方向鍵切換，`F` 全螢幕，`O` 總覽
+- `S` 講者畫面，`M` 導覽選單
+- 修改 `student-kit-slides.qmd` 後重新預覽
+
+```bash
+quarto preview student-kit-slides.qmd
+```
+
+::: {.small}
+[Quarto 簡報操作說明](https://quarto.org/docs/presentations/revealjs/presenting.html)。專案檔案連結需保留完整學生包才能開啟。
+:::
+
+::: {.notes}
+本次保留更新後的 Qmd 原始檔，未另外輸出簡報 HTML。本地文件、範本與技能連結仍指向學生包內原檔。若瀏覽器限制本地講者視窗，請在此資料夾執行 quarto preview student-kit-slides.qmd，從預覽頁開啟講者畫面，並允許該頁彈出視窗。Qmd 僅含教學文字、樣式與展示用程式區塊，不會執行資料處理。
+
+格式：https://quarto.org/docs/presentations/revealjs/ 。操作：https://quarto.org/docs/presentations/revealjs/presenting.html 。
+:::

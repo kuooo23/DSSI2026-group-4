@@ -1,0 +1,4 @@
+interface:
+  display_name: "外部檔案紀錄"
+  short_description: "Record external findings and reports in course format"
+  default_prompt: "Use $external-file to create a pure Markdown index using the external artifact basename and actual metadata, defaulting to zh-TW (Traditional Chinese with Taiwan usage) unless I specify another report language; use an analysis skill for substantive findings."

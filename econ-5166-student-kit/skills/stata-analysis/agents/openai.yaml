@@ -1,0 +1,4 @@
+interface:
+  display_name: "Stata 分析紀錄"
+  short_description: "Document Stata work using the course finding template"
+  default_prompt: "Use $stata-analysis to prepare the Stata-specific Markdown, do-file, and Google Doc content with code and actual results, or update a pure link record, defaulting to zh-TW (Traditional Chinese with Taiwan usage) unless I specify another report language."

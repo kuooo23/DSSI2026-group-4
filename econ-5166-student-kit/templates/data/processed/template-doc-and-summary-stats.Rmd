@@ -1,0 +1,152 @@
+---
+title: "template-doc-and-summary-stats"
+date: "`r format(Sys.time(), '%Y-%m-%d')`"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(error = FALSE)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+# Data Description
+- Author:
+- Date first created: YYYYMMDD
+- Background: 簡述資料內容
+- Unit of observation:
+- Sample period:
+- Known issues:
+- Definition for each variable:
+    -
+    -
+    -
+- Data path: `data/processed/<OUTPUT_FILE_NAME.csv>` (the exact file this notebook reads)
+- Source data: `<list every exact data/raw/... or upstream data/processed/... input>`
+- Processing code: `data/code/<PROCESSING_NAME.ipynb-or-Rmd>` (record the actual producer, or explain if supplied preprocessed)
+- Role: `<analysis | train | test; use the actual role, not a filename guess>`
+- Verification status: `<pending; only update after reopening this exact file and checking it>`
+- SHA-256: `<pending; fingerprint of this processed file after successful checks>`
+- Downstream analysis input: `data/processed/<OUTPUT_FILE_NAME.csv>` (must equal Data path)
+
+Keep these paths and the `PROJECT.md` Data Artifacts row consistent. The source
+and processing links describe lineage; later finding notebooks read this exact
+processed file. For train/test data, document each file and its role separately.
+Replace placeholders and adapt reader options to preserve the intended types.
+
+```{r}
+library(readr)
+
+find_project_root <- function(start = getwd()) {
+  candidate <- normalizePath(start, winslash = "/", mustWork = TRUE)
+  repeat {
+    if (file.exists(file.path(candidate, "AGENTS.md")) &&
+        dir.exists(file.path(candidate, "templates"))) return(candidate)
+    parent <- dirname(candidate)
+    if (identical(parent, candidate)) stop("Open this notebook within the student project containing AGENTS.md and templates/.")
+    candidate <- parent
+  }
+}
+PROJECT_ROOT <- find_project_root()
+
+project_file <- function(relative_path, area, must_exist = TRUE) {
+  # Exact project-relative paths only; no first-file search or OS-root /data path.
+  parts <- strsplit(relative_path, "/", fixed = TRUE)[[1]]
+  if (grepl("^(/|~|[A-Za-z]:)", relative_path) || ".." %in% parts ||
+      grepl("<", relative_path, fixed = TRUE) ||
+      !startsWith(relative_path, paste0("data/", area, "/"))) {
+    stop("Replace the placeholder with an exact path inside data/", area, "/: ", relative_path)
+  }
+  path <- file.path(PROJECT_ROOT, relative_path)
+  if (must_exist && (!file.exists(path) || dir.exists(path))) stop("Input file not found: ", path)
+  # Resolve existing ancestors to reject a path that leaves the project via a symlink.
+  ancestor <- path
+  while (!file.exists(ancestor)) ancestor <- dirname(ancestor)
+  resolved <- normalizePath(ancestor, winslash = "/", mustWork = TRUE)
+  allowed <- normalizePath(file.path(PROJECT_ROOT, "data", area), winslash = "/", mustWork = TRUE)
+  if (!startsWith(allowed, paste0(PROJECT_ROOT, "/"))) {
+    stop("data/", area, "/ resolves outside the project root.")
+  }
+  if (!identical(resolved, allowed) && !startsWith(resolved, paste0(allowed, "/"))) {
+    stop("Resolved path leaves data/", area, "/: ", relative_path)
+  }
+  path
+}
+
+sha256_file <- function(path) {
+  if (!requireNamespace("digest", quietly = TRUE)) {
+    stop("Cannot verify input identity: digest is unavailable. Use an available SHA-256 implementation before loading data.")
+  }
+  digest::digest(file = path, algo = "sha256", serialize = FALSE)
+}
+
+verify_input_sha256 <- function(path, expected) {
+  # Bind this run to the exact file inspected when the notebook was prepared.
+  if (!is.character(expected) || length(expected) != 1L || is.na(expected) ||
+      !grepl("^[0-9a-fA-F]{64}$", expected)) {
+    stop("Fill the expected SHA-256 from the inspected input before loading data.")
+  }
+  actual <- sha256_file(path)
+  if (!identical(actual, tolower(expected))) stop("Input changed: identify the new version before loading ", basename(path), ".")
+  actual
+}
+
+```
+
+## Change for Your Own Data
+
+Use the exact project-relative Data path above. A missing path stops execution;
+do not substitute another CSV or use the template/example data. The CSV reader
+below is a scaffold: configure dtypes, date parsing, missing codes, and the reader
+for the actual stored format. Fill the expected SHA-256 from the exact file
+inspected while preparing this notebook; placeholders or a changed file stop
+data loading. Documentation stays pending until executed.
+
+```{r}
+INPUT_RELATIVE_PATH <- "data/processed/<OUTPUT_FILE_NAME.csv>"
+input_data_file <- project_file(INPUT_RELATIVE_PATH, "processed")
+EXPECTED_COLUMNS <- c("<COLUMN_NAME>") # Ordered schema from the actual producer.
+EXPECTED_ROWS <- NULL # Set when the processing record supplies an expected row count.
+EXPECTED_SHA256 <- "<INSPECTED_INPUT_SHA256>" # Bind to the actual file inspected for this notebook.
+```
+
+## Summary
+
+```{r}
+input_fingerprint <- verify_input_sha256(input_data_file, EXPECTED_SHA256)
+df <- readr::read_csv(input_data_file, show_col_types = FALSE)
+# Set col_types/locale/na above for the actual file, especially IDs and dates.
+stopifnot(nrow(readr::problems(df)) == 0L)
+print(list(data_path = INPUT_RELATIVE_PATH, rows = nrow(df),
+           schema = vapply(df, function(x) paste(class(x), collapse = "/"), character(1)),
+           sha256 = sha256_file(input_data_file)))
+```
+
+### Sample
+
+```{r}
+head(df, 10)
+```
+
+### Summary Stats
+
+```{r}
+summary(df)
+```
+
+### Assertions
+
+```{r}
+# Replace the schema placeholder; add checks for actual keys, ranges,
+# missingness, units, merge coverage, and train/test separation as applicable.
+if (length(EXPECTED_COLUMNS) == 0L || any(grepl("<", EXPECTED_COLUMNS, fixed = TRUE))) {
+  stop("Fill the expected schema and dataset-specific assertions before verification.")
+}
+stopifnot(identical(names(df), EXPECTED_COLUMNS))
+if (!is.null(EXPECTED_ROWS)) stopifnot(nrow(df) == EXPECTED_ROWS)
+actual_sha256 <- sha256_file(input_data_file)
+if (!identical(actual_sha256, input_fingerprint)) stop("File changed during documentation: inspect the new version.")
+print(list(data_path = INPUT_RELATIVE_PATH, rows = nrow(df), columns = names(df),
+           sha256 = actual_sha256,
+           status = "configured checks passed"))
+# Update Data Description and the PROJECT.md Data Artifacts row only from real
+# results. Downstream finding code must use this exact path and verified SHA-256.
+```

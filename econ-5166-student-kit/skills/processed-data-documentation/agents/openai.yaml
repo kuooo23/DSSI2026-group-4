@@ -1,0 +1,4 @@
+interface:
+  display_name: "Processed Data Documentation"
+  short_description: "Document and verify saved data for downstream analysis"
+  default_prompt: "Use $processed-data-documentation to document and verify my saved data with the course template, asking for any missing format or material inputs and defaulting to zh-TW (Traditional Chinese with Taiwan usage) unless I specify another report language."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Data Processing"
+  short_description: "Prepare verified datasets with Jupyter or R Markdown"
+  default_prompt: "Use $data-processing to prepare verified datasets with the course template, asking for any missing format or material inputs and defaulting to zh-TW (Traditional Chinese with Taiwan usage) unless I specify another report language."

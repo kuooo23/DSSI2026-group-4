@@ -1,0 +1,4 @@
+interface:
+  display_name: "Maintain Project Context"
+  short_description: "Maintain PROJECT.md context, data, and contributions"
+  default_prompt: "Use $maintain-project-context to update PROJECT.md from confirmed project information, verified data artifacts, and contribution evidence."
