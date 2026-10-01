@@ -27,6 +27,8 @@ AI 只整理學生提供或明確確認的姓名與工作，不自行指派 PM�
 
 | Name | Student ID | GitHub Account | Role |
 | 楊捷睎 | B12104043 | --- | --- |
+| 郭千翠 | B13303122 | --- | --- |
+| 張亭婕 | B13303085 | --- | --- |
 
 ## Student Preferences
 
