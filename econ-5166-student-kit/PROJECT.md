@@ -60,6 +60,9 @@ AI 只整理學生提供或明確確認的姓名與工作，不自行指派 PM�
 
 | Dataset | Role | Data file | Documentation | Processing notebook | Verification | SHA-256 |
 | --- | --- | --- | --- | --- | --- | --- |
+| 2024 ACS PUMS Housing - MA | raw | [psam_h25.csv](data/raw/csv_hma/psam_h25.csv) | [ACS2024_PUMS_README.pdf](data/raw/csv_hma/ACS2024_PUMS_README.pdf); [2024 PUMS Data Dictionary](https://www2.census.gov/programs-surveys/acs/tech_docs/pums/data_dict/PUMS_Data_Dictionary_2024.txt) | 不適用（原始資料） | 36,522 筆；必要欄位存在；STATE 全為 25；核對日期 2026-11-06 | `f705f7384bd4fa2b9e16ea75987bea879ffc32ec2ae21dbe001fa74be1a39240` |
+| 2024 ACS PUMS Housing - MS | raw | [psam_h28.csv](data/raw/csv_hms/psam_h28.csv) | [ACS2024_PUMS_README.pdf](data/raw/csv_hms/ACS2024_PUMS_README.pdf); [2024 PUMS Data Dictionary](https://www2.census.gov/programs-surveys/acs/tech_docs/pums/data_dict/PUMS_Data_Dictionary_2024.txt) | 不適用（原始資料） | 15,361 筆；必要欄位存在；STATE 全為 28；核對日期 2026-11-06 | `6086aaad1fd1e7c7a7b6889b470910f72ea140d911dc0ecb716929f817952243` |
+| 2024 ACS MA/MS 加權家庭收入四分位數 | analysis | [income_quartiles_2024.csv](data/processed/income_quartiles_2024.csv) | 未另建（本次交付為 CSV 摘要） | [calculate_income_quartiles.py](data/code/calculate_income_quartiles.py)（Python 程式） | 重新讀取驗證 2 列（MA、MS）、欄位及數值；清理後樣本數 29,115 與 12,242；核對日期 2026-11-06 | `373fbf9fb3792b4fecdf442cbe50c93c17e2cbd9fe522e716746f219846e74bc` |
 
 路徑與連結相對於本專案根目錄。Role 記錄 raw／analysis／train／test 或已確認用途；Verification 說明實際執行的檢查、日期與限制，未完成時明列 pending／failed。SHA-256 由實際檔案計算。外部整理檔沒有產生程式可記 not available；原始來源可記 not applicable (source)。
 

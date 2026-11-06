@@ -1,0 +1,3 @@
+state,state_fips,sample_size_before_cleaning,sample_size_after_cleaning,estimated_households,Q1,Median,Q3,IQR
+MA,25,36522,29115,2829808,50254.875,104570.75,187821.25,137566.375
+MS,28,15361,12242,1176687,28427.0,59493.65,107514.975,79087.975
