@@ -1,0 +1,7 @@
+state,state_fips,sample_size_before_cleaning,sample_size_after_cleaning,excluded_typehugq,excluded_invalid_weight,excluded_missing_hincp,excluded_special_code,excluded_invalid_adjinc,excluded_invalid_adjusted_income,total_excluded,total_weight_after_cleaning
+Massachusetts,25,36522,29115,5941,0,1466,0,0,0,7407,2829808
+Colorado,08,30303,25377,3538,0,1388,0,0,0,4926,2479888
+District of Columbia,11,3914,3083,594,0,237,0,0,0,831,329688
+New Mexico,35,10741,8535,999,0,1207,0,0,0,2206,856974
+Louisiana,22,23719,19116,2329,0,2274,0,0,0,4603,1848975
+Mississippi,28,15361,12242,1767,0,1352,0,0,0,3119,1176687

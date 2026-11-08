@@ -1,0 +1,3 @@
+income_group,included_states,sample_size_before_cleaning,sample_size_after_cleaning,estimated_households,Q1,Median,Q3,IQR
+High,Massachusetts; Colorado; District of Columbia,70739,57575,5639384,50762.5,101525,178582.475,127819.975
+Low,New Mexico; Louisiana; Mississippi,49821,39893,3882636,29442.25,60915,111677.5,82235.25

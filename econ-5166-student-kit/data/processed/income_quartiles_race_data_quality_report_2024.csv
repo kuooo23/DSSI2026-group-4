@@ -1,0 +1,7 @@
+state,state_fips,sample_size_before_cleaning,sample_size_after_cleaning,excluded_typehugq,excluded_invalid_weight,excluded_missing_hincp,excluded_special_code,excluded_invalid_adjinc,excluded_invalid_adjusted_income,total_excluded,total_weight_after_cleaning
+Vermont,50,3875,2959,438,0,478,0,0,0,916,285548
+Maine,23,8796,6290,1148,0,1358,0,0,0,2506,615237
+West Virginia,54,9598,7841,933,0,824,0,0,0,1757,740845
+California,06,168133,141199,19353,0,7581,0,0,0,26934,13797644
+District of Columbia,11,3914,3083,594,0,237,0,0,0,831,329688
+Hawaii,15,6498,5181,770,0,547,0,0,0,1317,493151

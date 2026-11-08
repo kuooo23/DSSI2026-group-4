@@ -1,0 +1,3 @@
+race_group,included_states,sample_size_before_cleaning,sample_size_after_cleaning,estimated_households,Q1,Median,Q3,IQR
+High White Population Share,Vermont; Maine; West Virginia,22269,17090,1641630,35533.75,71067.5,121830,86296.25
+Low White Population Share,California; District of Columbia; Hawaii,178545,149463,14620483,49239.625,100509.75,180105.35,130865.725
