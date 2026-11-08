@@ -66,6 +66,8 @@ AI 只整理學生提供或明確確認的姓名與工作，不自行指派 PM�
 | 2024 ACS PUMS Housing - VT | raw | [psam_h50.csv](data/raw/csv_hvt/psam_h50.csv) | [ACS2024_PUMS_README.pdf](data/raw/csv_hvt/ACS2024_PUMS_README.pdf); [2024 PUMS Data Dictionary](https://www2.census.gov/programs-surveys/acs/tech_docs/pums/data_dict/PUMS_Data_Dictionary_2024.txt) | 不適用（原始資料） | 3,875 筆；必要欄位存在；STATE 全為 50；核對日期 2026-11-08 | `a2817884910d3d0b5080c8503586253d411584e6d1256b15dca1cd2a3d45a357` |
 | 2024 ACS MA/MS/HI/VT 加權家庭收入四分位數 | analysis | [income_quartiles_2024.csv](data/processed/income_quartiles_2024.csv) | 未另建（本次交付為 CSV 摘要） | [calculate_income_quartiles.py](data/code/calculate_income_quartiles.py)（MA/MS 原程式）；[calculate_income_quartiles_by_race.py](data/code/calculate_income_quartiles_by_race.py)（本次追加 HI/VT） | 重新讀取驗證 4 列（MA、MS、HI、VT）、欄位順序及數值；既有 MA/MS 資料列保留；HI/VT 清理後樣本數 5,181 與 2,959；核對日期 2026-11-08 | `3b47360827eb8bf7fc0997a3f7fe4712093e64620ee48cfdc04ccbba22375c96` |
 
+| HI／VT 房貸申請整理檔（使用者指定） | analysis | [state_HI-VT_white_percentage_15_columns.csv](data/processed/state_HI-VT_white_percentage_15_columns.csv) | [state_HI-VT_income_documentation.ipynb](data/processed/state_HI-VT_income_documentation.ipynb) | not available（外部整理檔，未提供上游程式） | 2026-11-08：乾淨 Jupyter kernel 核對 39,292 列、15 欄、HI／VT、action_taken 1／2／3；income 缺失 2,323 筆；年份及唯一性未驗證。依指定的 2024 ACS 州整體收入門檻（美元換算千美元），三種族分析樣本 25,267 筆；[已執行分析](finding/hi_vt_mortgage_approval.ipynb) | `962fb1339dbc92effc07c0d793089307d05f22fc78e01d6daf63741ffd7d9da6` |
+
 路徑與連結相對於本專案根目錄。Role 記錄 raw／analysis／train／test 或已確認用途；Verification 說明實際執行的檢查、日期與限制，未完成時明列 pending／failed。SHA-256 由實際檔案計算。外部整理檔沒有產生程式可記 not available；原始來源可記 not applicable (source)。
 
 ## Key Contributions
@@ -80,4 +82,6 @@ AI 只整理學生提供或明確確認的姓名與工作，不自行指派 PM�
 
 | Name | Contribution | Commit reference |
 | 楊捷睎 | DA | --- |
-| 待填 | 待填 | 待填 |
+| 待確認（已詢問） | HI／VT 房貸資料驗證及收入四分位組三種族核准率分析；作者與實際負責工作待學生確認 | 待提交 |
+
+本次版本提示（2026-11-08）：`finding/ma_ms_mortgage_approval.ipynb` 仍綁定追加 HI／VT 前的收入門檻檔 hash，因此直接重跑將因版本不符而停止。其 MA／MS 結果未在本次 HI／VT 任務中重分析；本次 HI／VT 文件已綁定四州版檔案。
