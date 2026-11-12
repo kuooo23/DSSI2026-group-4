@@ -1,0 +1,5 @@
+Group,Group_Description,Included_States,Q1_Income,Q2_Income,Q3_Income,Sample_Size,Weighted_Population
+Group A,Highest white population share,Vermont; Maine; West Virginia,14111.98,35533.75,64976.0,33721,3118774
+Group B,Lowest white population share,California; District of Columbia; Hawaii,12183.0,37564.25,81220.0,340076,32748201
+Group C,"Highest median household income (2024 ACS 1-Year, B19013)",District of Columbia; Massachusetts; Colorado,16954.67,47513.7,91372.5,119458,11105913
+Group D,"Lowest median household income (2024 ACS 1-Year, B19013)",Mississippi; New Mexico; Louisiana,10964.7,30355.97,58884.5,78564,7492655
