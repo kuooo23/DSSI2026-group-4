@@ -2,8 +2,7 @@
 
 - Author: Yu-Chang Chen
 - Date created: 20250828
-- Source: [Google 文件]([https://docs.google.com/document/d/1cTVvHdPR0MJYz7FrR9WZS7abSe4ZAyJoXvhlM8IUgEw/edit?tab=t.0#heading=h.u4v9mlb5wwtg](https://docs.google.com/document/d/15vl-Yw5TvZD0hcSTcxNA3GRa8UHbupM1dalVRCoQOEE/edit?usp=sharing))
-
+- Source: [Google 文件（研究提案）](https://docs.google.com/document/d/15vl-Yw5TvZD0hcSTcxNA3GRa8UHbupM1dalVRCoQOEE/edit?usp=sharing)
 第 1 組
 
 成員：
