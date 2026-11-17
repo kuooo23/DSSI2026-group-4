@@ -1,0 +1,28 @@
+{
+  "N": 1068027,
+  "outcome_mean": 0.761308468793392,
+  "states": [
+    "CA",
+    "CO",
+    "DC",
+    "HI",
+    "LA",
+    "MA",
+    "ME",
+    "MS",
+    "NM",
+    "VT",
+    "WV"
+  ],
+  "covariance": "HC1: sandwich * N/(N-3)",
+  "reference": "White",
+  "converged": true,
+  "inputs_sha256": {
+    "state_MA-CO-DC_income_high_15_columns.csv": "bd7902271c1d3efa36bdd0d19d2f456753f4117db9a55fab9f434709ac904c8b",
+    "state_NM-LA-MS_income_low_15_columns.csv": "e8ff73e6c26ce0189345feed4972863f3f91696249bc4a7c8fed37b0a0ccc7a4",
+    "state_VT-ME-WV_white_high_15_columns.csv": "eb1f7f550eb397ead2f900c142f1521cb4da04a892111b494b9a9d8f2eabbf51",
+    "state_HI-DC-CA_white_low_15_columns.csv": "7bc8724fa2db17f65d8a77bb91929be14ae8f063ede116317d24598e49ca1554"
+  },
+  "excluded_duplicate_source_DC": 8387,
+  "excluded_invalid_outcome_or_race": 0
+}

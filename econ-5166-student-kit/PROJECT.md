@@ -32,9 +32,18 @@ AI 只整理學生提供或明確確認的姓名與工作，不自行指派 PM�
 
 ## Student Preferences
 
-- Tool / artifact format: 待詢問學生（Python／Jupyter、R／R Markdown；明確選用 Stata 時依專用格式）
+- Tool / artifact format: 2026-11-17 使用者明確選擇沿用 Python／Jupyter Notebook（本次種族 logistic regression）。
 - Report language: 繁體中文（台灣用語，zh-TW；教師預設，學生明確指定其他語言時優先沿用）
 - Other explicit preferences: 尚未提供
+
+## 本次分析設定（2026-11-17）
+
+- 使用者問題：尚未控制收入、州別及其他貸款條件時，不同種族的房貸核准機率是否存在顯著差異？
+- 已確認：四份既有州群申請檔合併跑一個 Python logistic regression；白人為參考組，只納入黑人與亞洲人指標。
+- 核准為 `action_taken` 1／2，拒絕為 3；其他結果不納入；只分析既有三種族。
+- 合併 10 州與 DC；兩份 DC 來源逐列及重複次數一致，僅保留 MA–CO–DC 檔中的 DC；收入缺失不作為本模型排除條件。
+- 分析文件：[pooled_race_logistic_regression.ipynb](finding/pooled_race_logistic_regression.ipynb)。 2026-11-17 已從乾淨 kernel 執行並核對；N=1,068,027，黑人／亞洲人相對白人 OR=0.4461／1.0206，HC1 p<1e-300／0.002557，整體 Wald p<1e-300。模型採 HC1，未控制固定效果或調整機構／州內相關性；資料年份及申請唯一鍵尚未確認。
+- 作者與本次貢獻歸屬已詢問、尚待回答；不從電腦帳號或既有檔案作者推定。成果提交由學生自行操作。
 
 ## AI Agent Context
 
@@ -98,6 +107,7 @@ AI 只整理學生提供或明確確認的姓名與工作，不自行指派 PM�
 
 | Name | Contribution | Commit reference |
 | 楊捷睎 | DA | --- |
+| 待確認（已詢問） | 合併 10 州與 DC、建立僅種族 logistic regression 與 HC1 推論；作者與實際負責工作待確認 | 待提交 |
 | 待確認（已詢問） | HI／VT 房貸資料驗證及收入四分位組三種族核准率分析；作者與實際負責工作待學生確認 | 待提交 |
 
 本次版本提示（2026-11-08）：`finding/ma_ms_mortgage_approval.ipynb` 仍綁定追加 HI／VT 前的收入門檻檔 hash，因此直接重跑將因版本不符而停止。其 MA／MS 結果未在本次 HI／VT 任務中重分析；本次 HI／VT 文件已綁定四州版檔案。
