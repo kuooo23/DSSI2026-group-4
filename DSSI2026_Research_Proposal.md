@@ -2,7 +2,7 @@
 
 **Course / Group:** ECON 5166 / Group 4  
 **Draft date:** November 17, 2026  
-**Status:** Draft for team review; research motivation and mortgage-data provenance and period remain to be confirmed. The existing project record lists 楊捷睎 as Data Analyst; Project Manager and Data Engineer assignments are not recorded.
+**Status:** Draft for team review; research motivation and mortgage-data provenance and period remain to be confirmed. The existing project record lists 楊捷睎 as Data Analyst; the team has assigned 張亭婕 as Project Manager and 郭千翠 as Data Engineer for this proposal.
 
 **Members**
 
@@ -100,12 +100,10 @@ The study's potential value is a transparent description of unadjusted approval-
 
 ## 6. Team Roles and Responsibilities
 
-The project contribution record in `econ-5166-student-kit/PROJECT.md` lists 楊捷睎 as Data Analyst. No Project Manager or Data Engineer assignment is recorded, so those roles remain pending. Proposal-specific responsibilities should be confirmed by the team.
+The project contribution record in `econ-5166-student-kit/PROJECT.md` lists 楊捷睎 as Data Analyst. For this proposal, the team has assigned 張亭婕 as Project Manager and 郭千翠 as Data Engineer. Proposal-specific responsibilities beyond these role assignments should be confirmed by the team.
 
 | Course role | Member | Confirmed responsibility |
 | --- | --- | --- |
-| Project Manager | To be confirmed by the team | To be confirmed |
-| Data Engineer | To be confirmed by the team | To be confirmed |
+| Project Manager | 張亭婕 (B13303085) | Project Manager for this proposal; specific responsibilities to be confirmed. |
+| Data Engineer | 郭千翠 (B13303122) | Data Engineer for this proposal; specific responsibilities to be confirmed. |
 | Data Analyst | 楊捷睎 (B12104043) | Data Analyst is listed in `econ-5166-student-kit/PROJECT.md`; proposal-specific responsibilities to be confirmed. |
-
-**Other group members:** 郭千翠 (B13303122); 張亭婕 (B13303085). Their assignment to Project Manager or Data Engineer remains pending.
